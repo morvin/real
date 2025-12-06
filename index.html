@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcolatore Immobiliare Italia - Tutti i Comuni</title>
+    <title>Calcolatore Immobiliare Italia</title>
     <style>
+        /* Reset e stili base */
         * {
             margin: 0;
             padding: 0;
@@ -13,242 +14,296 @@
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
             padding: 20px;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
         }
         
+        /* Header */
         header {
+            background: linear-gradient(135deg, #0066cc 0%, #004488 100%);
+            color: white;
+            padding: 40px 30px;
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
         }
         
         h1 {
-            color: #2c3e50;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
         }
         
         .subtitle {
-            color: #7f8c8d;
-            font-size: 1.2rem;
-        }
-        
-        .stats-bar {
-            display: flex;
-            justify-content: space-around;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
+            font-size: 1.3rem;
             opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .search-section {
-            margin: 30px 0;
+        /* Sezione progetto */
+        .project-info {
+            padding: 40px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .project-info h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
             text-align: center;
         }
         
-        #searchInput {
-            width: 100%;
-            max-width: 500px;
-            padding: 15px 20px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
+        .description {
             font-size: 1.1rem;
-            outline: none;
-            transition: all 0.3s;
+            color: #444;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
         }
         
-        #searchInput:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-        }
-        
-        .comuni-container {
+        .features {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             margin-top: 30px;
         }
         
-        .comune-card {
+        .feature {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            text-decoration: none;
-            color: inherit;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             display: block;
         }
         
-        .comune-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            border-color: #667eea;
-        }
-        
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .comune-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-        
-        .provincia {
-            background: #e9ecef;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        .comune-info {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-        
-        .comune-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #f0f0f0;
-        }
-        
-        .stat-small {
-            text-align: center;
-        }
-        
-        .stat-small-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #667eea;
-        }
-        
-        .stat-small-label {
-            font-size: 0.8rem;
-            color: #7f8c8d;
-        }
-        
-        .add-new {
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-            color: white;
-            text-align: center;
-            padding: 30px;
-            border-radius: 15px;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        
-        .add-new:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(46, 204, 113, 0.3);
-        }
-        
-        .add-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-        
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 60px 20px;
-            color: #7f8c8d;
-        }
-        
-        .loading {
-            grid-column: 1 / -1;
-            text-align: center;
+        /* Lista città */
+        .cities-section {
             padding: 40px;
         }
         
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        footer {
-            margin-top: 50px;
+        .cities-section h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
             text-align: center;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
         }
         
         .instructions {
-            background: #f8f9fa;
-            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .city-card {
+            background: white;
             border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .city-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #e0e0e0;
+        }
+        
+        .city-card.available {
+            border-left: 5px solid #27ae60;
+        }
+        
+        .city-card.coming-soon {
+            border-left: 5px solid #f39c12;
+            opacity: 0.8;
+        }
+        
+        .city-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status {
+            font-size: 0.9rem;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .status.ready {
+            background-color: #d5f4e6;
+            color: #27ae60;
+        }
+        
+        .status.coming {
+            background-color: #fef5e7;
+            color: #f39c12;
+        }
+        
+        .stars {
+            color: #f1c40f;
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+        
+        .city-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .city-link:hover {
+            background-color: #0052a3;
+        }
+        
+        .city-link.coming {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .city-link.coming:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
             margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .color-box.ready {
+            background-color: #27ae60;
+        }
+        
+        .color-box.coming {
+            background-color: #f39c12;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            color: #bdc3c7;
             font-size: 0.9rem;
         }
         
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
-            .comuni-container {
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .cities-grid {
                 grid-template-columns: 1fr;
             }
             
-            .stats-bar {
+            .project-info, .cities-section {
+                padding: 30px 20px;
+            }
+            
+            header {
+                padding: 30px 20px;
+            }
+            
+            footer {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .legend {
                 flex-direction: column;
+                align-items: center;
                 gap: 15px;
             }
         }
@@ -256,315 +311,249 @@
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <header>
             <h1>🏠 Calcolatore Immobiliare Italia</h1>
-            <p class="subtitle">Stima il valore della tua casa in tutti i comuni italiani disponibili</p>
+            <p class="subtitle">Stima il valore della tua casa in tempo reale nelle principali città italiane</p>
         </header>
         
-        <div class="stats-bar">
-            <div class="stat">
-                <div class="stat-value" id="totalComuni">2</div>
-                <div class="stat-label">Comuni disponibili</div>
+        <!-- Sezione descrizione progetto -->
+        <section class="project-info">
+            <h2>Il Progetto</h2>
+            <p class="description">
+                Calcolatore Immobiliare Italia è uno strumento web gratuito che permette di stimare il valore degli immobili 
+                nelle diverse città italiane. Basato su dati di mercato medi e parametri personalizzabili, 
+                offre una stima indicativa in tempo reale. Il progetto è in continua espansione, 
+                con l'obiettivo di coprire progressivamente tutte le principali città italiane.
+            </p>
+            
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Calcolo in tempo reale</h3>
+                    <p>Risultati immediati al variare dei parametri</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Dati di mercato</h3>
+                    <p>Basati su valori medi aggiornati</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">📱</span>
+                    <h3>Accessibile ovunque</h3>
+                    <p>Funziona su tutti i dispositivi</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🆓</span>
+                    <h3>Completamente gratuito</h3>
+                    <p>Nessuna registrazione richiesta</p>
+                </div>
             </div>
-            <div class="stat">
-                <div class="stat-value" id="totalPages">2</div>
-                <div class="stat-label">Pagine calcolatori</div>
+        </section>
+        
+        <!-- Sezione città -->
+        <section class="cities-section">
+            <h2>Città Disponibili</h2>
+            <p class="instructions">Clicca su una città per calcolare il valore degli immobili. Le città con ⭐⭐ sono già disponibili!</p>
+            
+            <div class="cities-grid">
+                <!-- Bari -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Bari
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Puglia • BA</p>
+                    <p>Prezzo medio: € 2.100/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Bologna -->
+                <div class="city-card available">
+                    <div class="city-name">
+                        Bologna
+                        <span class="status ready">Disponibile <span class="stars">⭐⭐</span></span>
+                    </div>
+                    <p>Emilia-Romagna • BO</p>
+                    <p>Prezzo medio: € 3.500/m²</p>
+                    <a href="bologna.html" class="city-link">Calcola ora</a>
+                </div>
+                
+                <!-- Catania -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Catania
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Sicilia • CT</p>
+                    <p>Prezzo medio: € 1.600/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Cosenza -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Cosenza
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Calabria • CS</p>
+                    <p>Prezzo medio: € 1.300/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Genova -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Genova
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Liguria • GE</p>
+                    <p>Prezzo medio: € 2.800/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Milano -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Milano
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Lombardia • MI</p>
+                    <p>Prezzo medio: € 4.800/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Napoli -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Napoli
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Campania • NA</p>
+                    <p>Prezzo medio: € 2.600/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Palermo -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Palermo
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Sicilia • PA</p>
+                    <p>Prezzo medio: € 1.700/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Potenza -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Potenza
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Basilicata • PZ</p>
+                    <p>Prezzo medio: € 1.400/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Roma -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Roma
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Lazio • RM</p>
+                    <p>Prezzo medio: € 4.200/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Sala Consilina -->
+                <div class="city-card available">
+                    <div class="city-name">
+                        Sala Consilina
+                        <span class="status ready">Disponibile <span class="stars">⭐⭐</span></span>
+                    </div>
+                    <p>Campania • SA</p>
+                    <p>Prezzo medio: € 1.350/m²</p>
+                    <a href="sala_consilina.html" class="city-link">Calcola ora</a>
+                </div>
+                
+                <!-- Salerno -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Salerno
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Campania • SA</p>
+                    <p>Prezzo medio: € 2.200/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Torino -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Torino
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Piemonte • TO</p>
+                    <p>Prezzo medio: € 2.500/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Venezia -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Venezia
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Veneto • VE</p>
+                    <p>Prezzo medio: € 3.200/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+                
+                <!-- Verona -->
+                <div class="city-card coming-soon">
+                    <div class="city-name">
+                        Verona
+                        <span class="status coming">In arrivo</span>
+                    </div>
+                    <p>Veneto • VR</p>
+                    <p>Prezzo medio: € 2.400/m²</p>
+                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
             </div>
-            <div class="stat">
-                <div class="stat-value" id="lastUpdate">Oggi</div>
-                <div class="stat-label">Ultimo aggiornamento</div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="color-box ready"></div>
+                    <span>Disponibile (2 città)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box coming"></div>
+                    <span>In arrivo (13 città)</span>
+                </div>
             </div>
-        </div>
+        </section>
         
-        <div class="search-section">
-            <input type="text" id="searchInput" placeholder="🔍 Cerca comune per nome, provincia o regione...">
-        </div>
-        
-        <div class="comuni-container" id="comuniContainer">
-            <div class="loading">
-                <div class="spinner"></div>
-                <p>Caricamento comuni disponibili...</p>
-            </div>
-        </div>
-        
-        <a href="#addInstructions" class="add-new" id="addNewBtn">
-            <div class="add-icon">+</div>
-            <h3>Vuoi aggiungere un nuovo comune?</h3>
-            <p>Clicca qui per le istruzioni</p>
-        </a>
-        
-        <div class="instructions" id="addInstructions">
-            <h3>📋 Come aggiungere un nuovo comune:</h3>
-            <ol>
-                <li>Crea un nuovo file HTML (es: <code>roma.html</code>)</li>
-                <li>Usa lo stesso template delle altre pagine</li>
-                <li>Caricalo su GitHub insieme agli altri file</li>
-                <li>La home page lo troverà automaticamente!</li>
-            </ol>
-            <p><strong>Nota:</strong> Assicurati che il nome del file sia in minuscolo con underscore (es: <code>firenze.html</code>, <code>milano.html</code>, <code>roma.html</code>)</p>
-        </div>
-        
+        <!-- Footer -->
         <footer>
-            <p>© 2023 Calcolatore Immobiliare Italia - Strumento informativo basato su dati medi di mercato</p>
-            <p>Sito ospitato su Vercel - Deploy automatico da GitHub</p>
+            <div class="footer-content">
+                <h3>Calcolatore Immobiliare Italia</h3>
+                <p>Strumento informativo basato su dati medi di mercato. I risultati ottenuti sono stime indicative.</p>
+                
+                <div class="footer-links">
+                    <a href="https://github.com/morvin/real" target="_blank">GitHub Repository</a>
+                    <a href="https://vercel.com" target="_blank">Hosting su Vercel</a>
+                    <a href="#privacy">Privacy</a>
+                    <a href="#contatti">Contatti</a>
+                </div>
+                
+                <div class="copyright">
+                    <p>© 2023 Calcolatore Immobiliare Italia. Tutti i diritti riservati.</p>
+                    <p>I prezzi indicati sono valori medi indicativi e possono variare in base a specifiche condizioni di mercato.</p>
+                </div>
+            </div>
         </footer>
     </div>
-
-    <script>
-        // Database delle informazioni sui comuni
-        const comuniInfo = {
-            'bologna': {
-                nome: 'Bologna',
-                provincia: 'BO',
-                regione: 'Emilia-Romagna',
-                popolazione: '390.000',
-                prezzoMedio: '€ 3.500/m²',
-                zone: '12 zone',
-                colore: '#c1272d'
-            },
-            'sala_consilina': {
-                nome: 'Sala Consilina',
-                provincia: 'SA',
-                regione: 'Campania',
-                popolazione: '12.500',
-                prezzoMedio: '€ 1.350/m²',
-                zone: '5 zone',
-                colore: '#1e5799'
-            }
-            // Nuovi comuni verranno aggiunti dinamicamente
-        };
-        
-        // File da escludere dalla lista
-        const excludedFiles = ['index.html', '404.html', 'admin.html'];
-        
-        // Elementi DOM
-        const comuniContainer = document.getElementById('comuniContainer');
-        const searchInput = document.getElementById('searchInput');
-        const totalComuniEl = document.getElementById('totalComuni');
-        const totalPagesEl = document.getElementById('totalPages');
-        const lastUpdateEl = document.getElementById('lastUpdate');
-        
-        // Carica tutti i file HTML disponibili
-        async function caricaComuni() {
-            try {
-                // Prova a ottenere la lista dei file dal server
-                // Nota: su Vercel/GitHub Pages non possiamo leggere la directory
-                // Quindi usiamo un approccio diverso: proviamo a caricare file noti
-                // e abbiamo un elenco di fallback
-                
-                const comuniTrovati = [];
-                const fileDaTestare = [
-                    'bologna.html',
-                    'sala_consilina.html',
-                    'roma.html',
-                    'milano.html',
-                    'firenze.html',
-                    'napoli.html',
-                    'torino.html',
-                    'venezia.html',
-                    'genova.html',
-                    'palermo.html'
-                ];
-                
-                for (const file di fileDaTestare) {
-                    if (excludedFiles.includes(file)) continue;
-                    
-                    try {
-                        const response = await fetch(file, { method: 'HEAD' });
-                        if (response.ok) {
-                            comuniTrovati.push(file);
-                        }
-                    } catch (e) {
-                        // Ignora errori
-                    }
-                }
-                
-                // Se non troviamo nessun file, usiamo quelli di default
-                if (comuniTrovati.length === 0) {
-                    comuniTrovati.push('bologna.html', 'sala_consilina.html');
-                }
-                
-                return comuniTrovati;
-            } catch (error) {
-                console.error('Errore nel caricamento dei comuni:', error);
-                return ['bologna.html', 'sala_consilina.html']; // Fallback
-            }
-        }
-        
-        // Estrai nome comune dal nome file
-        function getComuneNameFromFile(filename) {
-            const nomeFile = filename.replace('.html', '');
-            const nomePulito = nomeFile.replace(/_/g, ' ');
-            
-            // Capitalizza ogni parola
-            return nomePulito.replace(/\b\w/g, l => l.toUpperCase());
-        }
-        
-        // Crea una card per un comune
-        function creaCardComune(filename) {
-            const nomeFile = filename.replace('.html', '');
-            const nomeComune = getComuneNameFromFile(filename);
-            
-            // Cerca informazioni nel database, altrimenti usa valori di default
-            const info = comuniInfo[nomeFile] || {
-                nome: nomeComune,
-                provincia: nomeFile.substring(0, 2).toUpperCase(),
-                regione: 'Italia',
-                popolazione: '--',
-                prezzoMedio: '€ --/m²',
-                zone: 'Zone standard',
-                colore: '#667eea'
-            };
-            
-            return `
-                <a href="${filename}" class="comune-card">
-                    <div class="card-header">
-                        <div class="comune-name">${info.nome}</div>
-                        <div class="provincia">${info.provincia}</div>
-                    </div>
-                    <div class="comune-info">
-                        ${info.regione} • ${info.popolazione} abitanti
-                    </div>
-                    <div class="comune-stats">
-                        <div class="stat-small">
-                            <div class="stat-small-value">${info.prezzoMedio}</div>
-                            <div class="stat-small-label">Prezzo medio</div>
-                        </div>
-                        <div class="stat-small">
-                            <div class="stat-small-value">${info.zone}</div>
-                            <div class="stat-small-label">Zone</div>
-                        </div>
-                        <div class="stat-small">
-                            <div class="stat-small-value">📱</div>
-                            <div class="stat-small-label">Calcolatore</div>
-                        </div>
-                    </div>
-                </a>
-            `;
-        }
-        
-        // Filtra i comuni in base alla ricerca
-        function filtraComuni(comuni, query) {
-            if (!query) return comuni;
-            
-            const queryLower = query.toLowerCase();
-            return comuni.filter(filename => {
-                const nomeFile = filename.replace('.html', '');
-                const info = comuniInfo[nomeFile];
-                
-                if (info) {
-                    return info.nome.toLowerCase().includes(queryLower) ||
-                           info.provincia.toLowerCase().includes(queryLower) ||
-                           info.regione.toLowerCase().includes(queryLower);
-                } else {
-                    const nomeComune = getComuneNameFromFile(filename);
-                    return nomeComune.toLowerCase().includes(queryLower);
-                }
-            });
-        }
-        
-        // Mostra i comuni nella pagina
-        function mostraComuni(files) {
-            if (files.length === 0) {
-                comuniContainer.innerHTML = `
-                    <div class="empty-state">
-                        <h3>Nessun comune trovato</h3>
-                        <p>Prova con un altro nome o controlla di avere i file HTML corretti.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            const cards = files.map(creaCardComune).join('');
-            comuniContainer.innerHTML = cards;
-            
-            // Aggiorna statistiche
-            totalComuniEl.textContent = files.length;
-            totalPagesEl.textContent = files.length;
-            lastUpdateEl.textContent = new Date().toLocaleDateString('it-IT');
-        }
-        
-        // Funzione principale
-        async function inizializza() {
-            // Mostra loading
-            comuniContainer.innerHTML = `
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Scansione dei comuni disponibili...</p>
-                </div>
-            `;
-            
-            // Carica comuni
-            const files = await caricaComuni();
-            
-            // Mostra comuni
-            mostraComuni(files);
-            
-            // Aggiungi listener per la ricerca
-            searchInput.addEventListener('input', function() {
-                const query = this.value;
-                const filesFiltrati = filtraComuni(files, query);
-                mostraComuni(filesFiltrati);
-            });
-            
-            // Pulsante per aggiungere nuovo comune
-            document.getElementById('addNewBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('addInstructions').scrollIntoView({ 
-                    behavior: 'smooth' 
-                });
-            });
-        }
-        
-        // Inizializza tutto al caricamento della pagina
-        document.addEventListener('DOMContentLoaded', inizializza);
-        
-        // Pulsante per forzare il refresh della lista
-        function aggiornaLista() {
-            inizializza();
-            
-            // Mostra notifica
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #2ecc71;
-                color: white;
-                padding: 15px 25px;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                z-index: 1000;
-            `;
-            notification.textContent = '✅ Lista comuni aggiornata!';
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-        
-        // Aggiungi tasto per refresh (utile per debug)
-        window.aggiornaListaComuni = aggiornaLista;
-        
-        // Aggiungi anche un tasto visibile in fondo per refresh
-        setTimeout(() => {
-            const refreshBtn = document.createElement('button');
-            refreshBtn.textContent = '🔄 Aggiorna lista comuni';
-            refreshBtn.style.cssText = `
-                display: block;
-                margin: 20px auto;
-                padding: 10px 20px;
-                background: #667eea;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 0.9rem;
-            `;
-            refreshBtn.onclick = aggiornaLista;
-            document.querySelector('footer').prepend(refreshBtn);
-        }, 1000);
-    </script>
 </body>
 </html>
