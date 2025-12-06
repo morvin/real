@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcolatore Immobiliare - Sala Consilina</title>
+    <title>Calcolatore Immobiliare - Bologna</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,8 +13,8 @@
     
     <style>
         :root {
-            --primary-color: #1e5799;
-            --secondary-color: #207cca;
+            --primary-color: #c1272d;
+            --secondary-color: #8b1a1e;
             --light-bg: #f8f9fa;
         }
         
@@ -92,7 +92,7 @@
         
         .form-control:focus, .form-select:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(30, 87, 153, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba(193, 39, 45, 0.25);
         }
         
         .detail-item {
@@ -115,11 +115,11 @@
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(30, 87, 153, 0.3);
+            box-shadow: 0 5px 15px rgba(193, 39, 45, 0.3);
         }
         
         .city-badge {
-            background-color: rgba(30, 87, 153, 0.1);
+            background-color: rgba(193, 39, 45, 0.1);
             color: var(--primary-color);
             padding: 5px 15px;
             border-radius: 20px;
@@ -168,7 +168,7 @@
                 Torna alla Home
             </a>
             <div class="d-flex align-items-center">
-                <span class="city-badge me-2">Sala Consilina • SA</span>
+                <span class="city-badge me-2">Bologna • BO</span>
                 <i class="bi bi-building fs-5 text-white"></i>
             </div>
         </div>
@@ -179,13 +179,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h1 class="mb-2">Calcolatore Immobiliare Sala Consilina</h1>
-                    <p class="lead mb-0">Stima il valore della tua casa nel comune di Sala Consilina (SA)</p>
+                    <h1 class="mb-2">Calcolatore Immobiliare Bologna</h1>
+                    <p class="lead mb-0">Stima il valore della tua casa in base ai parametri del mercato bolognese</p>
                 </div>
                 <div class="col-md-4 text-md-end">
                     <div class="d-inline-block text-start bg-white rounded-3 p-3 shadow-sm">
                         <div class="text-muted small">Prezzo medio al m²</div>
-                        <div class="fw-bold fs-4 text-primary">€ 1.350</div>
+                        <div class="fw-bold fs-4 text-primary">€ 3.500</div>
                     </div>
                 </div>
             </div>
@@ -215,13 +215,20 @@
                         
                         <!-- Zona -->
                         <div class="mb-4">
-                            <label class="form-label">Zona</label>
+                            <label class="form-label">Zona di Bologna</label>
                             <select class="form-select" id="zona">
-                                <option value="1.3">Centro Storico</option>
-                                <option value="1.1" selected>Centro</option>
-                                <option value="1.0">Semi-centro</option>
-                                <option value="0.9">Periferia</option>
-                                <option value="0.8">Zona rurale/campagna</option>
+                                <option value="1.5">Centro Storico (Due Torri, Piazza Maggiore)</option>
+                                <option value="1.3">Zona Universitaria (Via Zamboni, Studentato)</option>
+                                <option value="1.4">Colli Bolognesi (Osservanza, San Luca)</option>
+                                <option value="1.25">Santo Stefano / Murri</option>
+                                <option value="1.2">Cirenaica / Mazzini</option>
+                                <option value="1.15">Saragozza / Porta Saragozza</option>
+                                <option value="1.1">Bolognina / Piazza dell'Unità</option>
+                                <option value="1.0" selected>Navile / Lame</option>
+                                <option value="0.95">Borgo Panigale / Reno</option>
+                                <option value="0.9">San Donato / San Vitale</option>
+                                <option value="0.85">Periferie (Corticella, Roveri)</option>
+                                <option value="0.75">Hinterland (Casalech, San Lazzaro)</option>
                             </select>
                         </div>
                         
@@ -229,11 +236,12 @@
                         <div class="mb-4">
                             <label class="form-label">Tipologia</label>
                             <select class="form-select" id="tipologia">
-                                <option value="1.0" selected>Appartamento</option>
-                                <option value="1.15">Villa/casa indipendente</option>
+                                <option value="1.0" selected>Appartamento in condominio</option>
+                                <option value="1.3">Villa / Casa indipendente</option>
+                                <option value="1.2">Attico con terrazzo</option>
+                                <option value="1.15">Monolocale / Bilocale</option>
                                 <option value="0.95">Casa a schiera</option>
-                                <option value="1.05">Attico</option>
-                                <option value="0.9">Palazzina</option>
+                                <option value="1.1">Loft / Open space</option>
                             </select>
                         </div>
                         
@@ -241,10 +249,11 @@
                         <div class="mb-4">
                             <label class="form-label">Stato conservativo</label>
                             <select class="form-select" id="stato">
-                                <option value="1.15">Ottimo - Nuovo/ristrutturato</option>
-                                <option value="1.0" selected>Buono - Abitabile</option>
-                                <option value="0.85">Medio - Necessita lavori</option>
-                                <option value="0.7">Pessimo - Da ristrutturare</option>
+                                <option value="1.2">Eccellente - Nuovo di zecca</option>
+                                <option value="1.1">Ottimo - Ristrutturato di recente</option>
+                                <option value="1.0" selected>Buono - Abitabile, manutenzione ordinaria</option>
+                                <option value="0.85">Discreto - Necessita piccoli interventi</option>
+                                <option value="0.7">Mediocre - Da ristrutturare</option>
                             </select>
                         </div>
                         
@@ -253,16 +262,17 @@
                             <div class="col-md-6">
                                 <label class="form-label">Numero di locali</label>
                                 <div class="d-flex align-items-center">
-                                    <input type="range" class="form-range" min="1" max="8" value="4" id="locali" step="1">
-                                    <span class="range-value ms-3" id="localiValue">4</span>
+                                    <input type="range" class="form-range" min="1" max="8" value="3" id="locali" step="1">
+                                    <span class="range-value ms-3" id="localiValue">3</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Numero di bagni</label>
                                 <select class="form-select" id="bagni">
-                                    <option value="1.0" selected>1 bagno</option>
+                                    <option value="0.95" selected>1 bagno</option>
+                                    <option value="1.0">1.5 bagni (1 completo + 1 servizio)</option>
                                     <option value="1.05">2 bagni</option>
-                                    <option value="1.08">3+ bagni</option>
+                                    <option value="1.1">3+ bagni</option>
                                 </select>
                             </div>
                         </div>
@@ -272,21 +282,22 @@
                             <div class="col-md-6">
                                 <label class="form-label">Piano</label>
                                 <select class="form-select" id="piano">
-                                    <option value="0.95">Piano terra</option>
-                                    <option value="0.98">Primo piano</option>
+                                    <option value="0.9">Piano terra</option>
+                                    <option value="0.95">Primo piano</option>
                                     <option value="1.0" selected>Secondo-terzo piano</option>
-                                    <option value="1.05">Ultimo piano (con/senza terrazzo)</option>
-                                    <option value="0.9">Interrato/seminterrato</option>
+                                    <option value="1.1">Ultimo piano con terrazzo/soffitta</option>
+                                    <option value="1.15">Attico panoramico</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Classe energetica</label>
                                 <select class="form-select" id="classe">
-                                    <option value="1.1">A4-A3 (altissima efficienza)</option>
-                                    <option value="1.05">A2-A1 (alta efficienza)</option>
-                                    <option value="1.0" selected>B (buona efficienza)</option>
-                                    <option value="0.95">C-D (media efficienza)</option>
-                                    <option value="0.9">E-F-G (bassa efficienza)</option>
+                                    <option value="1.15">A4 (altissima efficienza)</option>
+                                    <option value="1.1">A3 (altissima efficienza)</option>
+                                    <option value="1.05">A2 (alta efficienza)</option>
+                                    <option value="1.0" selected>A1 (alta efficienza)</option>
+                                    <option value="0.95">B (buona efficienza)</option>
+                                    <option value="0.9">C (media efficienza)</option>
                                 </select>
                             </div>
                         </div>
@@ -298,7 +309,7 @@
                                 <option value="1.0" selected>Nessuna caratteristica extra</option>
                                 <option value="1.05">Box auto/garage</option>
                                 <option value="1.08">Giardino/terrazzo privato</option>
-                                <option value="1.1">Vista panoramica</option>
+                                <option value="1.1">Vista panoramica (colli o città)</option>
                                 <option value="1.07">Cantina/soffitta</option>
                                 <option value="1.12">Doppia esposizione/balcone</option>
                             </select>
@@ -316,8 +327,8 @@
                 <div class="result-card h-100 p-4">
                     <div class="text-center mb-4">
                         <h2 class="mb-3">Valore Stimato</h2>
-                        <div class="price-display mb-2" id="prezzoTotale">€ 135.000</div>
-                        <div class="price-per-mq" id="prezzoMq">€ 1.350/m²</div>
+                        <div class="price-display mb-2" id="prezzoTotale">€ 350.000</div>
+                        <div class="price-per-mq" id="prezzoMq">€ 3.500/m²</div>
                     </div>
                     
                     <!-- Dettaglio calcolo -->
@@ -328,7 +339,7 @@
                                 <tbody>
                                     <tr class="detail-item">
                                         <td><strong>Prezzo base al m²</strong></td>
-                                        <td class="text-end" id="prezzoBaseMq">€ 1.350</td>
+                                        <td class="text-end" id="prezzoBaseMq">€ 3.500</td>
                                     </tr>
                                     <tr class="detail-item">
                                         <td><strong>Superficie</strong></td>
@@ -336,7 +347,7 @@
                                     </tr>
                                     <tr class="detail-item">
                                         <td><strong>Valore base immobile</strong></td>
-                                        <td class="text-end" id="valoreBase">€ 135.000</td>
+                                        <td class="text-end" id="valoreBase">€ 350.000</td>
                                     </tr>
                                     <tr class="detail-item">
                                         <td><strong>Correzioni applicate</strong></td>
@@ -344,7 +355,7 @@
                                     </tr>
                                     <tr style="background-color: #f8f9fa;" class="fw-bold">
                                         <td class="py-3">VALORE STIMATO</td>
-                                        <td class="text-end py-3 fs-5" id="valoreFinale">€ 135.000</td>
+                                        <td class="text-end py-3 fs-5" id="valoreFinale">€ 350.000</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -353,8 +364,8 @@
                     
                     <!-- Info mercato -->
                     <div class="info-box mb-4">
-                        <h6 class="mb-2"><i class="bi bi-info-circle me-2"></i>Informazioni sul mercato di Sala Consilina</h6>
-                        <p class="mb-0 small">Comune di 12.500 abitanti in provincia di Salerno. Mercato immobiliare stabile con prezzi accessibili. Le differenze di prezzo sono principalmente legate alla zona (centro vs periferia) e allo stato dell'immobile.</p>
+                        <h6 class="mb-2"><i class="bi bi-info-circle me-2"></i>Informazioni sul mercato di Bologna</h6>
+                        <p class="mb-0 small">I prezzi variano da €2.800/m² nelle periferie a €7.000/m² nel centro storico. Bologna presenta un mercato dinamico con forte domanda da studenti e professionisti.</p>
                     </div>
                     
                     <!-- Note -->
@@ -372,7 +383,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <h6>Calcolatore Immobiliare Sala Consilina</h6>
+                    <h6>Calcolatore Immobiliare Bologna</h6>
                     <p class="small text-light mb-0">Strumento informativo basato su dati medi di mercato. I risultati sono stime indicative.</p>
                 </div>
                 <div class="col-md-4 text-md-end">
@@ -393,8 +404,8 @@
 
     <!-- Script di calcolo -->
     <script>
-        // Dati specifici per Sala Consilina
-        const PREZZO_BASE_SALA = 1350;
+        // Dati specifici per Bologna
+        const PREZZO_BASE_BOLOGNA = 3500;
         
         // Funzione per formattare i numeri in Euro
         function formattaEuro(numero) {
@@ -448,7 +459,7 @@
             else if (locali === 1) coeffLocali = 0.95;
             
             // Prezzo base zona
-            const prezzoBaseZona = PREZZO_BASE_SALA * zonaCoeff;
+            const prezzoBaseZona = PREZZO_BASE_BOLOGNA * zonaCoeff;
             
             // Calcolo valore
             let valore = prezzoBaseZona * superficie;
