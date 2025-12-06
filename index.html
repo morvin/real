@@ -4,556 +4,667 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calcolatore Immobiliare Italia</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
     <style>
-        /* Reset e stili base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
         }
         
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #0066cc 0%, #004488 100%);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            font-weight: 800;
-        }
-        
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Sezione progetto */
-        .project-info {
-            padding: 40px;
+            font-family: 'Open Sans', sans-serif;
             background-color: #f8f9fa;
-            border-bottom: 1px solid #eaeaea;
         }
         
-        .project-info h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            text-align: center;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
         }
         
-        .description {
-            font-size: 1.1rem;
-            color: #444;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            line-height: 1.8;
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
         }
         
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .feature {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        /* Lista città */
-        .cities-section {
-            padding: 40px;
-        }
-        
-        .cities-section h2 {
-            color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-        
-        .instructions {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #666;
-            font-size: 1.1rem;
-        }
-        
-        .cities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a2530 100%);
+            color: white;
+            padding: 80px 0;
         }
         
         .city-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: none;
+            border-radius: 12px;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            overflow: hidden;
+            height: 100%;
         }
         
         .city-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border-color: #e0e0e0;
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
         }
         
-        .city-card.available {
-            border-left: 5px solid #27ae60;
+        .city-card .card-body {
+            padding: 1.5rem;
         }
         
-        .city-card.coming-soon {
-            border-left: 5px solid #f39c12;
-            opacity: 0.8;
-        }
-        
-        .city-name {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 10px;
+        .city-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: start;
+            margin-bottom: 1rem;
         }
         
-        .status {
-            font-size: 0.9rem;
-            padding: 5px 15px;
+        .price-tag {
+            background-color: #e8f4fc;
+            color: var(--secondary-color);
+            padding: 5px 12px;
             border-radius: 20px;
-            font-weight: 600;
-        }
-        
-        .status.ready {
-            background-color: #d5f4e6;
-            color: #27ae60;
-        }
-        
-        .status.coming {
-            background-color: #fef5e7;
-            color: #f39c12;
-        }
-        
-        .stars {
-            color: #f1c40f;
-            font-size: 1.2rem;
-            margin-left: 10px;
-        }
-        
-        .city-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #0066cc;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-        
-        .city-link:hover {
-            background-color: #0052a3;
-        }
-        
-        .city-link.coming {
-            background-color: #95a5a6;
-            cursor: not-allowed;
-        }
-        
-        .city-link.coming:hover {
-            background-color: #7f8c8d;
-        }
-        
-        .legend {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .color-box {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-        }
-        
-        .color-box.ready {
-            background-color: #27ae60;
-        }
-        
-        .color-box.coming {
-            background-color: #f39c12;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        
-        .copyright {
-            margin-top: 30px;
-            color: #bdc3c7;
+            font-weight: 700;
             font-size: 0.9rem;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .cities-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .project-info, .cities-section {
-                padding: 30px 20px;
-            }
-            
-            header {
-                padding: 30px 20px;
-            }
-            
-            footer {
-                padding: 30px 20px;
-            }
+        .available-badge {
+            background-color: var(--success-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
         }
         
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
+        .coming-badge {
+            background-color: var(--warning-color);
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .city-info {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .city-info i {
+            width: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stats-box {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .price-meter {
+            height: 6px;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .price-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #f39c12, #e74c3c);
+            border-radius: 3px;
+        }
+        
+        .price-legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            border: none;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 50px 0;
             }
             
-            .features {
-                grid-template-columns: 1fr;
-            }
-            
-            .legend {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
+            .stat-number {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <h1>🏠 Calcolatore Immobiliare Italia</h1>
-            <p class="subtitle">Stima il valore della tua casa in tempo reale nelle principali città italiane</p>
-        </header>
-        
-        <!-- Sezione descrizione progetto -->
-        <section class="project-info">
-            <h2>Il Progetto</h2>
-            <p class="description">
-                Calcolatore Immobiliare Italia è uno strumento web gratuito che permette di stimare il valore degli immobili 
-                nelle diverse città italiane. Basato su dati di mercato medi e parametri personalizzabili, 
-                offre una stima indicativa in tempo reale. Il progetto è in continua espansione, 
-                con l'obiettivo di coprire progressivamente tutte le principali città italiane.
-            </p>
-            
-            <div class="features">
-                <div class="feature">
-                    <span class="feature-icon">⚡</span>
-                    <h3>Calcolo in tempo reale</h3>
-                    <p>Risultati immediati al variare dei parametri</p>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--primary-color);">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-house-heart-fill me-2"></i>
+                Calcolatore Immobiliare
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">Calcola il valore della tua casa</h1>
+                    <p class="lead mb-4">Stima in tempo reale il valore degli immobili nelle principali città italiane. Strumento gratuito basato su dati di mercato.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#cities" class="btn btn-light btn-lg">
+                            <i class="bi bi-building me-2"></i>Vedi tutte le città
+                        </a>
+                        <a href="#how-it-works" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-info-circle me-2"></i>Come funziona
+                        </a>
+                    </div>
                 </div>
-                <div class="feature">
-                    <span class="feature-icon">🎯</span>
-                    <h3>Dati di mercato</h3>
-                    <p>Basati su valori medi aggiornati</p>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">📱</span>
-                    <h3>Accessibile ovunque</h3>
-                    <p>Funziona su tutti i dispositivi</p>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">🆓</span>
-                    <h3>Completamente gratuito</h3>
-                    <p>Nessuna registrazione richiesta</p>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="stats-box">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Città italiane</div>
+                    </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- Sezione città -->
-        <section class="cities-section">
-            <h2>Città Disponibili</h2>
-            <p class="instructions">Clicca su una città per calcolare il valore degli immobili. Le città con ⭐⭐ sono già disponibili!</p>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title">Come funziona</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="text-center p-3">
+                        <div class="feature-icon mx-auto">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <h4>Scegli la città</h4>
+                        <p class="text-muted">Seleziona una delle città disponibili per iniziare il calcolo.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-3">
+                        <div class="feature-icon mx-auto">
+                            <i class="bi bi-sliders"></i>
+                        </div>
+                        <h4>Imposta i parametri</h4>
+                        <p class="text-muted">Inserisci superficie, zona, stato e altre caratteristiche.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-3">
+                        <div class="feature-icon mx-auto">
+                            <i class="bi bi-calculator"></i>
+                        </div>
+                        <h4>Ottieni la stima</h4>
+                        <p class="text-muted">Ricevi immediatamente una stima del valore dell'immobile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cities Section -->
+    <section id="cities" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Città per prezzo medio al m²</h2>
             
-            <div class="cities-grid">
-                <!-- Bari -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Bari
-                        <span class="status coming">In arrivo</span>
-                    </div>
-                    <p>Puglia • BA</p>
-                    <p>Prezzo medio: € 2.100/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+            <!-- Price Range Indicator -->
+            <div class="mb-5">
+                <div class="price-meter">
+                    <div class="price-fill" style="width: 100%;"></div>
                 </div>
-                
-                <!-- Bologna -->
-                <div class="city-card available">
-                    <div class="city-name">
-                        Bologna
-                        <span class="status ready">Disponibile <span class="stars">⭐⭐</span></span>
-                    </div>
-                    <p>Emilia-Romagna • BO</p>
-                    <p>Prezzo medio: € 3.500/m²</p>
-                    <a href="bologna.html" class="city-link">Calcola ora</a>
+                <div class="price-legend">
+                    <span>€ 1.300/m²</span>
+                    <span>€ 3.050/m²</span>
+                    <span>€ 4.800/m²</span>
                 </div>
-                
-                <!-- Catania -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Catania
-                        <span class="status coming">In arrivo</span>
-                    </div>
-                    <p>Sicilia • CT</p>
-                    <p>Prezzo medio: € 1.600/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
-                </div>
-                
-                <!-- Cosenza -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Cosenza
-                        <span class="status coming">In arrivo</span>
-                    </div>
-                    <p>Calabria • CS</p>
-                    <p>Prezzo medio: € 1.300/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
-                </div>
-                
-                <!-- Genova -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Genova
-                        <span class="status coming">In arrivo</span>
-                    </div>
-                    <p>Liguria • GE</p>
-                    <p>Prezzo medio: € 2.800/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
-                </div>
-                
+            </div>
+
+            <!-- Cities Grid -->
+            <div class="row g-4">
                 <!-- Milano -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Milano
-                        <span class="status coming">In arrivo</span>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Milano</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 4.800/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Lombardia • MI</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>1.400.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Capitale economica d'Italia, mercato immobiliare tra i più dinamici e costosi.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
                     </div>
-                    <p>Lombardia • MI</p>
-                    <p>Prezzo medio: € 4.800/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
                 </div>
-                
-                <!-- Napoli -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Napoli
-                        <span class="status coming">In arrivo</span>
-                    </div>
-                    <p>Campania • NA</p>
-                    <p>Prezzo medio: € 2.600/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
-                </div>
-                
-                <!-- Palermo -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Palermo
-                        <span class="status coming">In arrivo</span>
-                    </div>
-                    <p>Sicilia • PA</p>
-                    <p>Prezzo medio: € 1.700/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
-                </div>
-                
-                <!-- Potenza -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Potenza
-                        <span class="status coming">In arrivo</span>
-                    </div>
-                    <p>Basilicata • PZ</p>
-                    <p>Prezzo medio: € 1.400/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
-                </div>
-                
+
                 <!-- Roma -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Roma
-                        <span class="status coming">In arrivo</span>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Roma</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 4.200/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Lazio • RM</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>2.873.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Capitale d'Italia, forte domanda nel centro storico e zone diplomatiche.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
                     </div>
-                    <p>Lazio • RM</p>
-                    <p>Prezzo medio: € 4.200/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
                 </div>
-                
-                <!-- Sala Consilina -->
-                <div class="city-card available">
-                    <div class="city-name">
-                        Sala Consilina
-                        <span class="status ready">Disponibile <span class="stars">⭐⭐</span></span>
+
+                <!-- Bologna -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Bologna</h5>
+                                <span class="available-badge">Disponibile</span>
+                            </div>
+                            <span class="price-tag">€ 3.500/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Emilia-Romagna • BO</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>390.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Importante città universitaria, mercato sostenuto da studenti e professionisti.</p>
+                            <a href="bologna.html" class="btn btn-primary w-100 mt-3">
+                                <i class="bi bi-calculator me-2"></i>Calcola ora
+                            </a>
+                        </div>
                     </div>
-                    <p>Campania • SA</p>
-                    <p>Prezzo medio: € 1.350/m²</p>
-                    <a href="sala_consilina.html" class="city-link">Calcola ora</a>
                 </div>
-                
-                <!-- Salerno -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Salerno
-                        <span class="status coming">In arrivo</span>
-                    </div>
-                    <p>Campania • SA</p>
-                    <p>Prezzo medio: € 2.200/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
-                </div>
-                
-                <!-- Torino -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Torino
-                        <span class="status coming">In arrivo</span>
-                    </div>
-                    <p>Piemonte • TO</p>
-                    <p>Prezzo medio: € 2.500/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
-                </div>
-                
+
                 <!-- Venezia -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Venezia
-                        <span class="status coming">In arrivo</span>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Venezia</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 3.200/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Veneto • VE</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>261.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Città unica al mondo, prezzi influenzati dal turismo e dalla posizione.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
                     </div>
-                    <p>Veneto • VE</p>
-                    <p>Prezzo medio: € 3.200/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
                 </div>
-                
+
+                <!-- Genova -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Genova</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 2.800/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Liguria • GE</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>580.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Importante porto italiano, prezzi variano molto tra centro e periferie collinari.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Napoli -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Napoli</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 2.600/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Campania • NA</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>959.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Terza città italiana per popolazione, forte divario tra zone centrali e periferiche.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Torino -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Torino</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 2.500/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Piemonte • TO</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>886.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Importante polo industriale, in fase di rinnovamento urbano.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Verona -->
-                <div class="city-card coming-soon">
-                    <div class="city-name">
-                        Verona
-                        <span class="status coming">In arrivo</span>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Verona</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 2.400/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Veneto • VR</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>258.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Patrimonio UNESCO, mercato influenzato dal turismo e dalla posizione strategica.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
                     </div>
-                    <p>Veneto • VR</p>
-                    <p>Prezzo medio: € 2.400/m²</p>
-                    <a href="coming_soon.html" class="city-link coming">Prossimamente</a>
+                </div>
+
+                <!-- Salerno -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Salerno</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 2.200/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Campania • SA</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>133.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Importante città costiera, in forte sviluppo negli ultimi anni.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bari -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Bari</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 2.100/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Puglia • BA</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>322.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Capoluogo di regione, importante porto e centro economico del Sud.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Palermo -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Palermo</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 1.700/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Sicilia • PA</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>676.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Capoluogo siciliano, centro storico patrimonio UNESCO in fase di valorizzazione.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catania -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Catania</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 1.600/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Sicilia • CT</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>311.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Seconda città siciliana, importante porto e centro universitario.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Potenza -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Potenza</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 1.400/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Basilicata • PZ</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>67.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Capoluogo di regione più alto d'Italia, mercato immobiliare contenuto.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sala Consilina -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Sala Consilina</h5>
+                                <span class="available-badge">Disponibile</span>
+                            </div>
+                            <span class="price-tag">€ 1.350/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Campania • SA</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>12.500 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Importante centro del Vallo di Diano, mercato immobiliare stabile.</p>
+                            <a href="sala_consilina.html" class="btn btn-primary w-100 mt-3">
+                                <i class="bi bi-calculator me-2"></i>Calcola ora
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cosenza -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm city-card">
+                        <div class="card-body">
+                            <div class="city-header">
+                                <h5 class="card-title mb-0">Cosenza</h5>
+                                <span class="coming-badge">In arrivo</span>
+                            </div>
+                            <span class="price-tag">€ 1.300/m²</span>
+                            <div class="mt-3">
+                                <p class="city-info"><i class="bi bi-geo-alt me-2"></i>Calabria • CS</p>
+                                <p class="city-info"><i class="bi bi-people me-2"></i>67.000 abitanti</p>
+                            </div>
+                            <p class="card-text text-muted small">Importante città universitaria, centro culturale della Calabria.</p>
+                            <a href="coming_soon.html" class="btn btn-secondary w-100 mt-3">
+                                <i class="bi bi-clock me-2"></i>Prossimamente
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="color-box ready"></div>
-                    <span>Disponibile (2 città)</span>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="stats-box">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Città disponibili</div>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="color-box coming"></div>
-                    <span>In arrivo (13 città)</span>
+                <div class="col-md-4">
+                    <div class="stats-box">
+                        <div class="stat-number">13</div>
+                        <div class="stat-label">In arrivo</div>
+                    </div>
                 </div>
-            </div>
-        </section>
-        
-        <!-- Footer -->
-        <footer>
-            <div class="footer-content">
-                <h3>Calcolatore Immobiliare Italia</h3>
-                <p>Strumento informativo basato su dati medi di mercato. I risultati ottenuti sono stime indicative.</p>
-                
-                <div class="footer-links">
-                    <a href="https://github.com/morvin/real" target="_blank">GitHub Repository</a>
-                    <a href="https://vercel.com" target="_blank">Hosting su Vercel</a>
-                    <a href="#privacy">Privacy</a>
-                    <a href="#contatti">Contatti</a>
-                </div>
-                
-                <div class="copyright">
-                    <p>© 2023 Calcolatore Immobiliare Italia. Tutti i diritti riservati.</p>
-                    <p>I prezzi indicati sono valori medi indicativi e possono variare in base a specifiche condizioni di mercato.</p>
+                <div class="col-md-4">
+                    <div class="stats-box">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Totale città</div>
+                    </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-3">Calcolatore Immobiliare Italia</h5>
+                    <p class="text-light small">Strumento informativo basato su dati medi di mercato. I risultati sono stime indicative.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-light small mb-2">
+                        <i class="bi bi-github me-2"></i>
+                        <a href="https://github.com/morvin/real" class="text-light" target="_blank">GitHub Repository</a>
+                    </p>
+                    <p class="text-light small mb-0">
+                        <i class="bi bi-cloud me-2"></i>
+                        Hosting su Vercel • Deploy automatico
+                    </p>
+                </div>
+            </div>
+            <hr class="border-light my-3">
+            <p class="text-center text-light small mb-0">&copy; 2023 Calcolatore Immobiliare Italia. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
